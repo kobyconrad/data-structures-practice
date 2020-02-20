@@ -2,12 +2,12 @@ var Stack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
 
-  let storage = {};
-  // extend(storage, stackMethods);
+  let obj = {};
+  obj.storage = {};
 
-  extend(storage, stackMethods);
+  extend(obj, stackMethods);
 
-  return storage;
+  return obj;
 };
 
 var extend = function(obj, methods) {
@@ -18,30 +18,27 @@ var extend = function(obj, methods) {
 
 var stackMethods = {
   push: function(value) {
-    // let storage = {};
-    let pushedKey = `${Object.keys(storage).length}`;
-    storage[pushedKey] = value;
-    return Object.keys(storage).length;
+    let pushedKey = `${Object.keys(this.storage).length}`;
+    this.storage[pushedKey] = value;
+    return Object.keys(this.storage).length;
   },
   pop: function() {
-    // let storage = {};
-    let poppedKey = `${Object.keys(storage).length - 1}`;
-    let element = storage[poppedKey];
-    delete storage[poppedKey];
+    let poppedKey = `${Object.keys(this.storage).length - 1}`;
+    let element = this.storage[poppedKey];
+    delete this.storage[poppedKey];
     return element;
   },
   size: function() {
-    // let storage = {};
     let accumulator = [];
-    for (let key in storage) {
+    for (let key in this.storage) {
       let push = true;
       for (let i = 0; i < accumulator.length; i++) {
-        if (accumulator[i] === storage[key]) {
+        if (accumulator[i] === this.storage[key]) {
           push = false;
         }
       }
       if (push === true) {
-        accumulator.push(storage[key]);
+        accumulator.push(this.storage[key]);
       }
     }
     return accumulator.length;
